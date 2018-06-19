@@ -12,7 +12,7 @@ cd dogs-api
 npm install
 ```
 
-#Environment Variables
+# Environment Variables
 
 You'll need to create a local .env file to store your application's secrets. Follow these steps to generate and store the secrets.
 
@@ -28,21 +28,21 @@ PORT=5000
 COUCH_HOSTNAME=https://username:password@databaseurl/
 COUCH_DBNAME=yourDatabaseName
 ```
-##Start the api
+## Start the api
 Run the following command to start the api on the designated port.
 
 `npm start`
 
-##Endpoints
+## Endpoints
 CRUD - Create (POST), Read (GET), Update (PUT), Delete (DELETE)
 
-#Create a dog - POST /dogs
+# Create a dog - POST /dogs
 Add a dog to the collection dogs by providing a new dog resource in the request body.
 
 *Example*
 
 ```
-POST /dogs
+# POST /dogs
 
 {
     "name": "Nugget",
@@ -52,12 +52,12 @@ POST /dogs
 }
 ```
 
-Get a single dog by id - GET /dogs/{id}
+# Get a single dog by id - GET /dogs/{id}
 Retrieve a single dog resource from the collection of dogs.
 
 *Example*
 
-GET /dogs/dogID
+# GET /dogs/dogID
 
 {
     "_id": "dog-golden-retriever-nugget",
@@ -73,7 +73,7 @@ Update a dog - PUT /dogs/{id}
 
 Let's update the entire dog resource and decrease Nugget's age from 18 to 11 years old.
 
-PUT /dogs/Nugget
+# PUT /dogs/Nugget
 ```
 {
     "_id": "dog-golden-retriever-nugget",
@@ -85,7 +85,7 @@ PUT /dogs/Nugget
 }
 ```
 
-Delete a dog - DELETE /dogs/{id}
+# Delete a dog - DELETE /dogs/{id}
 Delete a dog given an id.
 
 Example
