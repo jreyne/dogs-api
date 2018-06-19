@@ -42,7 +42,8 @@ Add a dog to the collection dogs by providing a new dog resource in the request 
 *Example*
 
 ```
-# POST /dogs
+## POST /dogs
+
 
 {
     "name": "Nugget",
@@ -52,12 +53,12 @@ Add a dog to the collection dogs by providing a new dog resource in the request 
 }
 ```
 
-# Get a single dog by id - GET /dogs/{id}
+## Get a single dog by id - GET /dogs/{id}
 Retrieve a single dog resource from the collection of dogs.
 
 *Example*
 
-# GET /dogs/dogID
+## GET /dogs/dogID
 
 {
     "_id": "dog-golden-retriever-nugget",
@@ -68,12 +69,12 @@ Retrieve a single dog resource from the collection of dogs.
     "owner": "Will Adkins",
     "age": 18
 }
-Update a dog - PUT /dogs/{id}
+## Update a dog - PUT /dogs/{id}
 *Example*
 
 Let's update the entire dog resource and decrease Nugget's age from 18 to 11 years old.
 
-# PUT /dogs/Nugget
+PUT /dogs/Nugget
 ```
 {
     "_id": "dog-golden-retriever-nugget",
@@ -85,7 +86,7 @@ Let's update the entire dog resource and decrease Nugget's age from 18 to 11 yea
 }
 ```
 
-# Delete a dog - DELETE /dogs/{id}
+## Delete a dog - DELETE /dogs/{id}
 Delete a dog given an id.
 
 Example
