@@ -8,3 +8,11 @@ const NodeHTTPError = require("node-http-error")
 const bodyParser = require("body-parser")
 const api = express()
 const {} = require("ramda")
+
+// Get route
+
+api.get("/", function(req, res, next) {
+  res.status(200).send("Welcome to the dog api dawg.")
+})
+
+api.listen(port, () => console.log("API is up and running.", port))
