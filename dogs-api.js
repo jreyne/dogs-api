@@ -24,6 +24,7 @@ api.get('/dogs/:dogID', function(req, res, next) {
   getDog(dogID, function(err, dog) {
     if (err) {
       next(new NodeHTTPError(err.status, err.message, err))
+      return
     }
     res.status(200).send(dog)
   })
