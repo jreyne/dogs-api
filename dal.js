@@ -8,6 +8,9 @@ const db = new PouchDB(
   `${process.env.COUCH_HOSTNAME}${process.env.COUCH_DBNAME}`
 )
 
-const dal = {}
+const getDog = (dogID, callback) => {
+  db.get(dogID, callback)
+}
+const dal = { getDog }
 
 module.exports = dal
