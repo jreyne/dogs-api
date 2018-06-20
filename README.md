@@ -14,7 +14,7 @@ npm install
 
 ## Environment Variables
 
-You'll need to create a local .env file to store your application's secrets. Follow these steps to generate and store the secrets.
+You'll need to create a local .env file to store your application's secrets. Follow these steps to generate and store the secrets. Secrets can be passwords, user IDs, etc...
 
 
 `PORT` - Create a `PORT` environment variable. Set the value to an unused port number for your machine.
@@ -41,7 +41,7 @@ Run the following command to start the api on the designated port.
 CRUD - Create (POST), Read (GET), Update (PUT), Delete (DELETE)
 
 ## Create a dog - POST /dogs
-Add a dog to the collection dogs by providing a new dog resource in the request body.
+Add a dog to the collection of dogs by providing a new dog resource in the request body.
 
 *Example*
 
@@ -63,8 +63,8 @@ Retrieve a single dog resource from the collection of dogs.
 *Example*
 
 ### GET /dogs/dogID
-```
-{
+
+`{
     "_id": "dog-golden-retriever-nugget",
     "_rev": "1-3980jf09jferfj90jg0",
     "type": "dog",
@@ -72,7 +72,7 @@ Retrieve a single dog resource from the collection of dogs.
     "breed": "golden retriever",
     "owner": "Will Adkins",
     "age": 18
-} ```
+}`
 
 ## Update a dog - PUT /dogs/{id}
 
