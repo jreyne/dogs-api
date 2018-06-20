@@ -12,13 +12,17 @@ cd dogs-api
 npm install
 ```
 
-# Environment Variables
+## Environment Variables
 
-You'll need to create a local .env file to store your application's secrets. Follow these steps to generate and store the secrets.
+You'll need to create a local .env file to store your application's secrets. Follow these steps to generate and store the secrets. Secrets can be passwords, user IDs, etc...
 
 
 `PORT` - Create a `PORT` environment variable. Set the value to an unused port number for your machine.
+
+
 `HOSTNAME` - Create a `HOSTNAME` environment variable. This will be the .url to the database platform you wish to access.
+
+
 `DBNAME`- Create a `DBNAME` environment variable.  This is the name of the database you wish to interrogate.
 
 *.env* file example:
@@ -36,15 +40,15 @@ Run the following command to start the api on the designated port.
 ## Endpoints
 CRUD - Create (POST), Read (GET), Update (PUT), Delete (DELETE)
 
-# Create a dog - POST /dogs
-Add a dog to the collection dogs by providing a new dog resource in the request body.
+## Create a dog - POST /dogs
+Add a dog to the collection of dogs by providing a new dog resource in the request body.
 
 *Example*
 
+
+### POST /dogs
+
 ```
-## POST /dogs
-
-
 {
     "name": "Nugget",
     "breed": "golden retriever",
@@ -58,9 +62,9 @@ Retrieve a single dog resource from the collection of dogs.
 
 *Example*
 
-## GET /dogs/dogID
+### GET /dogs/dogID
 
-{
+`{
     "_id": "dog-golden-retriever-nugget",
     "_rev": "1-3980jf09jferfj90jg0",
     "type": "dog",
@@ -68,13 +72,15 @@ Retrieve a single dog resource from the collection of dogs.
     "breed": "golden retriever",
     "owner": "Will Adkins",
     "age": 18
-}
+}`
+
 ## Update a dog - PUT /dogs/{id}
+
 *Example*
 
 Let's update the entire dog resource and decrease Nugget's age from 18 to 11 years old.
 
-PUT /dogs/Nugget
+### PUT /dogs/Nugget
 ```
 {
     "_id": "dog-golden-retriever-nugget",
@@ -89,8 +95,10 @@ PUT /dogs/Nugget
 ## Delete a dog - DELETE /dogs/{id}
 Delete a dog given an id.
 
-Example
+*Example*
 
 Let's delete the entire Nugget dog resource.
 
-```DELETE /dog-golden-retriever-nugget
+```
+DELETE /dog-golden-retriever-nugget
+```
