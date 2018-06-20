@@ -32,4 +32,18 @@ api.delete('/dogs/:dogID', function(req, res, next) {
   })
 })
 
+api.use(function(err, req, res, next) {
+  console.log(
+    'ERROR! ',
+    'METHOD: ',
+    req.method,
+    ' PATH',
+    req.path,
+    ' error:',
+    JSON.stringify(err)
+  )
+  res.status(err.status || 500)
+  res.send(err)
+})
+
 api.listen(port, () => console.log('API is up and running.', port))
