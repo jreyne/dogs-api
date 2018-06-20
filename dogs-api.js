@@ -16,6 +16,8 @@ api.get('/', function(req, res, next) {
   res.status(200).send('Welcome to the dog api dawg.')
 })
 
+// Get Dog Route
+
 api.get('/dogs/:dogID', function(req, res, next) {
   const dogID = req.params.dogID
 
