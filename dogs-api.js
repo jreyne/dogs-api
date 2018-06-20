@@ -7,7 +7,11 @@ const express = require('express');
 const NodeHTTPError = require('node-http-error');
 const bodyParser = require('body-parser');
 const api = express();
-const {} = require('ramda');
+const { propOr, pick, isEmpty, curry, difference } = require('ramda');
+const cleanObj = (arrApprovedKeys, obj) => pick(arrApprovedKeys, obj);
+const checkRequredFields = curry((arrProps, obj) =>
+	difference(arrProps, keys(obj))
+);
 
 // Get route
 
@@ -49,8 +53,7 @@ api.post('/dogs', function(req, res, next) {
 	}
 
 	const newNewDog = merge(cleanObj(['breed', 'name', 'owner', 'age'], newDog), {
-		id: newDog.name,
-		type: 'dog'
+		id: newDog.name
 	});
 	const db = append(newNewDog, db);
 	res.status(201).send({ ok: true, data: newNewDog });
