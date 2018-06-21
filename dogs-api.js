@@ -20,7 +20,17 @@ api.get('/dogs/:dogID', function(req, res, next) {
   const dogID = req.params.dogID
 })
 
-// Error Handling Middleware
+// Delete Dog Route
+
+api.delete('/dogs/:dogID', function(req, res, next) {
+  deleteDog(req.params.dogID, function(err, data) {
+    if (err) {
+      next(new NodeHTTPError(err.status, err.message, err))
+      return
+    }
+    res.status(200).send(data)
+  })
+})
 
 api.use(function(err, req, res, next) {
   console.log(
