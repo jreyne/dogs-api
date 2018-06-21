@@ -1,33 +1,52 @@
 // Enviornment Variables
-require("dotenv").config()
+require('dotenv').config()
 const port = process.env.PORT || 5000
 
 // Dependeceies
-const express = require("express")
-const NodeHTTPError = require("node-http-error")
-const bodyParser = require("body-parser")
+const express = require('express')
+const NodeHTTPError = require('node-http-error')
+const bodyParser = require('body-parser')
 const api = express()
-const { deleteDog, getDog, replaceDog } = require("./dal")
-const { isEmpty, propOr, curry, difference, keys, not } = require("ramda")
-const createMissingFieldsMsg = require("./lib/create-missing-fields-msg")
-const cleanObj = require("./lib/clean-obj")
-const stringToNumber = require("./lib/string-to-number")
-const stringToBool = require("./lib/string-to-bool")
+const { deleteDog, getDog, replaceDog, listDogs } = require('./dal')
+const {
+  isEmpty,
+  propOr,
+  curry,
+  difference,
+  keys,
+  not,
+  pathOr
+} = require('ramda')
+const createMissingFieldsMsg = require('./lib/create-missing-fields-msg')
+const cleanObj = require('./lib/clean-obj')
+const stringToNumber = require('./lib/string-to-number')
+const stringToBool = require('./lib/string-to-bool')
 
 // Lib files
-const checkRequiredFields = require("./lib/check-required-fields")
+const checkRequiredFields = require('./lib/check-required-fields')
 
 api.use(bodyParser.json())
 
 // Get route
 
-api.get("/", function(req, res, next) {
-  res.status(200).send("Welcome to the dog api dawg.")
+api.get('/', function(req, res, next) {
+  res.status(200).send('Welcome to the dog api dawg.')
 })
 
+api.get('/dogs', function(req, res, next) {
+  const limit = pathOr(100, ['query', 'limit'], req)
+
+  listDogs(limit, function(err, dogs) {
+    if (err) {
+      next(new NodeHTTPError(err.status, err.message, err))
+      return
+    }
+    res.status(200).send(dogs)
+  })
+})
 // Get Dog Route
 
-api.get("/dogs/:dogID", function(req, res, next) {
+api.get('/dogs/:dogID', function(req, res, next) {
   const dogID = req.params.dogID
 
   getDog(dogID, function(err, dog) {
@@ -41,7 +60,7 @@ api.get("/dogs/:dogID", function(req, res, next) {
 
 // Delete Dog Route
 
-api.delete("/dogs/:dogID", function(req, res, next) {
+api.delete('/dogs/:dogID', function(req, res, next) {
   deleteDog(req.params.dogID, function(err, data) {
     if (err) {
       next(new NodeHTTPError(err.status, err.message, err))
@@ -51,9 +70,9 @@ api.delete("/dogs/:dogID", function(req, res, next) {
   })
 })
 
-api.put("/dogs/:dogID", function(req, res, next) {
-  const newDog = propOr({}, "body", req)
-  console.log("newDog", newDog)
+api.put('/dogs/:dogID', function(req, res, next) {
+  const newDog = propOr({}, 'body', req)
+  console.log('newDog', newDog)
   if (isEmpty(newDog)) {
     next(
       new NodeHTTPError(
@@ -65,7 +84,7 @@ api.put("/dogs/:dogID", function(req, res, next) {
   }
 
   const missingFields = checkRequiredFields(
-    ["_id", "_rev", "breed", "owner", "age", "name"],
+    ['_id', '_rev', 'breed', 'owner', 'age', 'name'],
     newDog
   )
   if (not(isEmpty(missingFields))) {
@@ -74,7 +93,7 @@ api.put("/dogs/:dogID", function(req, res, next) {
   }
 
   const cleanDog = cleanObj(
-    ["_id", "_rev", "breed", "owner", "age", "name"],
+    ['_id', '_rev', 'breed', 'owner', 'age', 'name'],
     newDog
   )
 
@@ -89,16 +108,16 @@ api.put("/dogs/:dogID", function(req, res, next) {
 
 api.use(function(err, req, res, next) {
   console.log(
-    "ERROR! ",
-    "METHOD: ",
+    'ERROR! ',
+    'METHOD: ',
     req.method,
-    " PATH",
+    ' PATH',
     req.path,
-    " error:",
+    ' error:',
     JSON.stringify(err)
   )
   res.status(err.status || 500)
   res.send(err)
 })
 
-api.listen(port, () => console.log("API is up and running.", port))
+api.listen(port, () => console.log('API is up and running.', port))

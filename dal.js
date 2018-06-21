@@ -1,7 +1,7 @@
-require("dotenv").config()
-const PouchDB = require("pouchdb-core")
-PouchDB.plugin(require("pouchdb-adapter-http"))
-const {} = require("ramda")
+require('dotenv').config()
+const PouchDB = require('pouchdb-core')
+PouchDB.plugin(require('pouchdb-adapter-http'))
+const { prop, propOr, map } = require('ramda')
 
 // Creates an instance of a couchdb database @ the url provided in the string template
 const db = new PouchDB(
@@ -44,5 +44,18 @@ const getDog = (dogID, callback) => {
   db.get(dogID, callback)
 }
 
-const dal = { getDog, replaceDog, deleteDog }
+const listDogs = (limitStr, cb) => {
+  db.allDocs({ include_docs: true, limit: Number(limitStr) }, function(
+    err,
+    dogs
+  ) {
+    if (err) {
+      cb(err)
+      return
+    }
+    cb(null, map(prop('doc'), propOr([], 'rows', dogs)))
+  })
+}
+
+const dal = { getDog, replaceDog, deleteDog, listDogs }
 module.exports = dal
