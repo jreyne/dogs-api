@@ -24,6 +24,9 @@ const deleteDog = (dogID, callback) => {
   })
 }
 
-const dal = { deleteDog }
+const getDog = (dogID, callback) => {
+  db.get(dogID, callback)
+}
 
+const dal = { getDog, deleteDog }
 module.exports = dal
